@@ -1,0 +1,22 @@
+{
+  "name": "mothlight",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/tauhip/mothlight.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/tauhip/mothlight/issues"
+  },
+  "homepage": "https://gitlab.com/tauhip/mothlight#readme",
+  "engines": {
+    "node": "12.x"
+  }
+}
