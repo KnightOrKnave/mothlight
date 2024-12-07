@@ -17,6 +17,10 @@
   },
   "homepage": "https://gitlab.com/tauhip/mothlight#readme",
   "engines": {
-    "node": "12.x"
+    "node": "22.x"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "supabase": "^2.0.0"
   }
 }
