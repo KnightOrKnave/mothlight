@@ -6,7 +6,7 @@ async function t() {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
   );
 
-  const r = await c.from('TEST_TABLE').select('*').order('created_at');
+  const r = await c.from('TEST_TABLE').select('*');
   console.log(JSON.stringify(r));
 }
 
