@@ -9,8 +9,6 @@ console.log('Hello from Functions!');
 
 Deno.serve(async (req) => {
   console.log(req);
-  const rr = await req.json();
-  console.log(rr);
   return new Response(JSON.stringify({ result: 'ok' }), {
     headers: { 'Content-Type': 'application/json' },
   });

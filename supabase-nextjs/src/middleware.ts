@@ -8,8 +8,7 @@ export async function middleware(request: NextRequest) {
   );
 
   if (request.nextUrl.pathname.includes('page.js')) {
-    console.debug(request.headers);
-    console.debug(userAgent(request));
+    console.debug(request.headers.get('host'));
 
     const c = createClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
