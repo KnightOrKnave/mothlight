@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse, userAgent } from 'next/server';
+import { createClient } from '@supabase/supabase-js';
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   console.log(
     'middleware.ts: request.nextUrl.pathname',
     request.nextUrl.pathname
@@ -9,6 +10,13 @@ export function middleware(request: NextRequest) {
   if (request.nextUrl.pathname.includes('page.js')) {
     console.debug(request.headers);
     console.debug(userAgent(request));
+
+    const c = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    );
+
+    await c.from('LOGGING_TABLE').insert({ header: userAgent(request) });
   }
 
   return NextResponse.next();
