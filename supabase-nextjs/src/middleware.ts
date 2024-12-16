@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse, userAgent } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
+import { randomUUID } from 'crypto';
 
 export async function middleware(request: NextRequest) {
   console.log(
@@ -15,7 +16,11 @@ export async function middleware(request: NextRequest) {
       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
     );
 
-    await c.from('LOGGING_TABLE').insert({ header: userAgent(request) });
+    const uuid = randomUUID();
+    await c
+      .from('LOGGING_TABLE')
+      .insert({ id: uuid, header: userAgent(request) });
+    c.functions.invoke('func-test', { body: { id: uuid } });
   }
 
   return NextResponse.next();
