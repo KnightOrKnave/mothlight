@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/tauhip/mothlight.git"
+    "url": ""
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://gitlab.com/tauhip/mothlight/issues"
+    "url": ""
   },
-  "homepage": "https://gitlab.com/tauhip/mothlight#readme",
+  "homepage": "",
   "engines": {
     "node": "22.x"
   },
