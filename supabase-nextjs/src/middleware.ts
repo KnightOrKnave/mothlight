@@ -8,7 +8,10 @@ export async function middleware(request: NextRequest) {
     request.nextUrl.pathname
   );
 
-  if (request.nextUrl.pathname.includes('page.js')) {
+  if (
+    request.nextUrl.pathname.includes('page.js') ||
+    request.nextUrl.pathname === '/'
+  ) {
     console.debug(request.headers.get('host'));
 
     const c = createClient(
