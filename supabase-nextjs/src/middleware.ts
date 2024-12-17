@@ -19,7 +19,7 @@ export async function middleware(request: NextRequest) {
       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
     );
 
-    const uuid = randomUUID();
+    const uuid = crypto.randomUUID() || randomUUID();
     await c
       .from('LOGGING_TABLE')
       .insert({ id: uuid, header: userAgent(request) });
