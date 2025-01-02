@@ -49,7 +49,7 @@ export const Articles = () => {
     (async () => {
       try {
         const { data, error } = await sbClient
-          .from('ARTICLE_TABLE')
+          .from('ARTICLES_TABLE')
           .select('title,excerpt,link')
           .order('created_at', { ascending: false })
           .limit(LATEST_ARTICLE_COUNT);
