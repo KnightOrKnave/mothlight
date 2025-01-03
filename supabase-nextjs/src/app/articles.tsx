@@ -53,8 +53,11 @@ export const Articles = () => {
           .select('title,excerpt,link')
           .order('created_at', { ascending: false })
           .limit(LATEST_ARTICLE_COUNT);
+        if (error) {
+          console.error(error);
+          setArticles([]);
+        }
         setArticles(data as Article[]);
-        console.error(error);
       } catch (error) {
         console.error(error);
         setArticles([]);
