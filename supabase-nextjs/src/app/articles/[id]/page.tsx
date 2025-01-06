@@ -1,26 +1,31 @@
-import { notFound } from 'next/navigation';
+'use client';
+import { use } from 'react';
+import { notFound, useParams } from 'next/navigation';
+import { sbClient } from '@/spabaseClient';
 
-const articles = [
-  {
-    id: '1',
-    title: '未来を変える！AIとロボティクスの進化',
-    content:
-      'AIとロボティクスの進化が私たちの日常を劇的に変えつつあります。最近では、自動運転技術の進歩や、人間の手助けをする家庭用ロボットが注目を集めています。これらの技術は、仕事の効率を上げるだけでなく、生活の質を向上させる可能性を秘めています。',
-  },
-  {
-    id: '2',
-    title: '健康的な生活のための5つの簡単な習慣',
-    content:
-      '健康を保つためには、日々の習慣が重要です。毎日10分間の軽い運動、十分な水分補給、バランスの取れた食事、規則正しい睡眠、ストレス管理を取り入れましょう。',
-  },
-  // 他の記事も追加可能
-];
+type Content = {
+  title: string;
+  content: string;
+};
 
-export default function ArticlePage({ params }: { params: { id: string } }) {
-  const article = articles.find((article) => article.id === params.id);
+async function getData(id: string): Promise<Content> {
+  const { data, error } = await sbClient
+    .from('ARTICLES_TABLE')
+    .select('title,content')
+    .eq('id', id)
+    .limit(1);
+  if (error || !data || data.length !== 1) {
+    console.error(error);
+    return { title: '', content: '' };
+  }
+  return data[0];
+}
 
-  if (!article) {
-    notFound(); // ページが見つからない場合
+export default function ArticlePage() {
+  const params: { id: string } = useParams();
+  const content = use<Content>(getData(params.id));
+  if (!content) {
+    notFound();
   }
 
   return (
@@ -28,14 +33,14 @@ export default function ArticlePage({ params }: { params: { id: string } }) {
       {/* Header */}
       <header className="bg-blue-600 text-white py-4">
         <div className="container mx-auto flex justify-between items-center px-4">
-          <h1 className="text-xl font-bold">{article.title}</h1>
+          <h1 className="text-xl font-bold">{content.title}</h1>
         </div>
       </header>
 
       {/* Article Content */}
       <main className="container mx-auto px-4 py-8">
         <article className="bg-white shadow-lg rounded-lg p-6 text-gray-700">
-          <p>{article.content}</p>
+          <p>{content.content}</p>
         </article>
       </main>
 
