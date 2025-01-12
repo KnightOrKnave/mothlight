@@ -2,11 +2,14 @@
 import { use } from 'react';
 import { notFound, useParams } from 'next/navigation';
 import { sbClient } from '@/spabaseClient';
+import { MDXRemote } from 'next-mdx-remote/rsc';
 
 type Content = {
   title: string;
   content: string;
 };
+
+const teststr = `# page not found`;
 
 async function getData(id: string): Promise<Content> {
   const { data, error } = await sbClient
@@ -16,7 +19,7 @@ async function getData(id: string): Promise<Content> {
     .limit(1);
   if (error || !data || data.length !== 1) {
     console.error(error);
-    return { title: '', content: '' };
+    return { title: 'test', content: teststr };
   }
   return data[0];
 }
@@ -38,10 +41,8 @@ export default function ArticlePage() {
       </header>
 
       {/* Article Content */}
-      <main className="container mx-auto px-4 py-8">
-        <article className="bg-white shadow-lg rounded-lg p-6 text-gray-700">
-          <p>{content.content}</p>
-        </article>
+      <main className="container text-black mx-auto px-4 py-8">
+        <MDXRemote source={content.content} />
       </main>
 
       {/* Footer */}

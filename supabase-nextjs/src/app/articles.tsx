@@ -5,6 +5,7 @@ import { sbClient } from '@/spabaseClient';
 const LATEST_ARTICLE_COUNT = 5;
 
 type Article = {
+  id: string;
   title: string;
   excerpt: string;
   link: string;
@@ -43,7 +44,15 @@ export const Articles = () => {
             className="bg-white shadow-lg rounded-lg p-6 hover:shadow-xl transition"
           >
             <h3 className="text-xl font-semibold text-blue-600 hover:underline">
-              <a href={article.link}>{article.title}</a>
+              <a
+                href={
+                  article.link === 'default'
+                    ? `/articles/${article.id}`
+                    : article.link
+                }
+              >
+                {article.title}
+              </a>
             </h3>
             <p className="text-gray-700 mt-2">{article.excerpt}</p>
           </li>
