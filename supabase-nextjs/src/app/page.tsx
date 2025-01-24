@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Articles } from './articles';
 export default function Home() {
   return (
@@ -17,6 +18,9 @@ export default function Home() {
       <footer className="bg-blue-600 text-white py-6">
         <div className="container mx-auto text-center">
           <p>&copy; 2024 記事一覧ページ. All rights reserved.</p>
+          <Link href="/disclaimer">
+            <p>免責事項</p>
+          </Link>
         </div>
       </footer>
     </div>
